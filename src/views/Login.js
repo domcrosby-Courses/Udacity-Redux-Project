@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { logIn, logOut } from '../ducks/auth';
+import { logIn, logOut, getUsers } from '../ducks/auth';
 // import BookShelf from '../components/BookShelf';
 
 const propTypes = {};
@@ -9,10 +9,28 @@ const propTypes = {};
 const defaultProps = {};
 
 class Login extends Component {
+  componentDidMount() {
+    this.props.getUsers();
+  }
+
+  userOptions() {
+    console.log('loaded');
+    const userData = Object.values(this.props.users);
+    console.log(userData);
+    userData.map(user => {
+      return <option value={user.id}>{user.name}</option>;
+    });
+  }
+
   render() {
     return (
       <div>
         <p>You must log in to view the page</p>
+        <select>
+          {Object.values(this.props.users).map(user => {
+            return <option value={user.id}>{user.name}</option>;
+          })}
+        </select>
         <button
           onClick={() => {
             this.props.logIn('Dominic');
@@ -33,14 +51,14 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  const { user } = state.auth;
-  return { user };
+  const { user, users, selectedUser } = state.auth;
+  return { user, users, selectedUser };
 }
 
 // second field here is the mapDispatchToProps
 export default connect(
   mapStateToProps,
-  { logIn, logOut }
+  { logIn, logOut, getUsers }
 )(Login);
 
 Login.propTypes = propTypes;
