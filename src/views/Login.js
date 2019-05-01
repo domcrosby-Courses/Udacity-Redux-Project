@@ -13,22 +13,17 @@ class Login extends Component {
     this.props.getUsers();
   }
 
-  userOptions() {
-    console.log('loaded');
-    const userData = Object.values(this.props.users);
-    console.log(userData);
-    userData.map(user => {
-      return <option value={user.id}>{user.name}</option>;
-    });
-  }
-
   render() {
     return (
       <div>
         <p>You must log in to view the page</p>
         <select>
           {Object.values(this.props.users).map(user => {
-            return <option value={user.id}>{user.name}</option>;
+            return (
+              <option value={user.id} key={user.id}>
+                {user.name}
+              </option>
+            );
           })}
         </select>
         <button
