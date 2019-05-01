@@ -37,16 +37,10 @@ function mapStateToProps(state) {
   return { user };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    logIn: user => dispatch(logIn(user)),
-    logOut: () => dispatch(logOut())
-  }; // here we're mapping actions to props
-}
-
+// second field here is the mapDispatchToProps
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { logIn, logOut }
 )(Login);
 
 Login.propTypes = propTypes;
