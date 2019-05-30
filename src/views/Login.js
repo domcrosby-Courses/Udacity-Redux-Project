@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { logIn, logOut, getUsers } from '../ducks/auth';
+import { logIn, logOut, getUsers, selectUser } from '../ducks/auth';
 // import BookShelf from '../components/BookShelf';
 
 const propTypes = {};
@@ -13,11 +13,18 @@ class Login extends Component {
     this.props.getUsers();
   }
 
+  change = event => {
+    this.props.selectUser(event.target.value);
+  };
+
   render() {
     return (
       <div>
         <p>You must log in to view the page</p>
-        <select>
+        <select onChange={this.change} value={this.props.selectedUser}>
+          <option disabled value={'unselected'}>
+            Choose here
+          </option>
           {Object.values(this.props.users).map(user => {
             return (
               <option value={user.id} key={user.id}>
@@ -28,7 +35,7 @@ class Login extends Component {
         </select>
         <button
           onClick={() => {
-            this.props.logIn('Dominic');
+            this.props.logIn(this.props.selectedUser);
           }}
         >
           Log in
@@ -53,7 +60,7 @@ function mapStateToProps(state) {
 // second field here is the mapDispatchToProps
 export default connect(
   mapStateToProps,
-  { logIn, logOut, getUsers }
+  { logIn, logOut, getUsers, selectUser }
 )(Login);
 
 Login.propTypes = propTypes;
