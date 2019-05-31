@@ -4,28 +4,39 @@ import PropTypes from 'prop-types';
 import { logIn, logOut, getUsers, selectUser } from '../ducks/auth';
 // import BookShelf from '../components/BookShelf';
 
-const propTypes = {};
+const propTypes = {
+  actionGetUsers: PropTypes.func.isRequired,
+  actionSelectUser: PropTypes.func.isRequired,
+  actionLogIn: PropTypes.func.isRequired,
+  actionLogOut: PropTypes.func.isRequired,
+  selectedUser: PropTypes.string.isRequired,
+  users: PropTypes.objectOf(PropTypes.object).isRequired
+};
 
 const defaultProps = {};
 
 class Login extends Component {
   componentDidMount() {
-    this.props.getUsers();
+    const { actionGetUsers } = this.props;
+    actionGetUsers();
   }
 
+  // This is the correct way of calling a helper function
   change = event => {
-    this.props.selectUser(event.target.value);
+    const { actionSelectUser } = this.props;
+    actionSelectUser(event.target.value);
   };
 
   render() {
+    const { selectedUser, users, actionLogIn, actionLogOut } = this.props;
     return (
       <div>
         <p>You must log in to view the page</p>
-        <select onChange={this.change} value={this.props.selectedUser}>
-          <option disabled value={'unselected'}>
+        <select onChange={this.change} value={selectedUser}>
+          <option disabled value="unselected">
             Choose here
           </option>
-          {Object.values(this.props.users).map(user => {
+          {Object.values(users).map(user => {
             return (
               <option value={user.id} key={user.id}>
                 {user.name}
@@ -34,15 +45,17 @@ class Login extends Component {
           })}
         </select>
         <button
+          type="submit"
           onClick={() => {
-            this.props.logIn(this.props.selectedUser);
+            actionLogIn(selectedUser);
           }}
         >
           Log in
         </button>
         <button
+          type="submit"
           onClick={() => {
-            this.props.logOut();
+            actionLogOut();
           }}
         >
           Log Out
@@ -60,7 +73,12 @@ function mapStateToProps(state) {
 // second field here is the mapDispatchToProps
 export default connect(
   mapStateToProps,
-  { logIn, logOut, getUsers, selectUser }
+  {
+    actionLogIn: logIn,
+    actionLogOut: logOut,
+    actionGetUsers: getUsers,
+    actionSelectUser: selectUser
+  }
 )(Login);
 
 Login.propTypes = propTypes;
