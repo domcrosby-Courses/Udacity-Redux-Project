@@ -1,39 +1,59 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
+import LoadingBar from 'react-redux-loading';
 import handleInitialData from '../ducks/initialData';
 import HomeView from '../views/HomeView';
 import Login from '../views/Login';
 import '../App.css';
 import { PrivateRoute, Nav } from '../Components';
 
-const propTypes = {};
+const propTypes = {
+  loading: PropTypes.bool.isRequired,
+  actionInitialData: PropTypes.func.isRequired
+};
 
 const defaultProps = {};
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    const { actionInitialData } = this.props;
+    actionInitialData();
   }
 
+  // use fragment here to group
   render() {
+    const { loading } = this.props;
     return (
-      <div className="App">
-        <Nav />
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/" component={HomeView} />
-      </div>
+      <Fragment>
+        <LoadingBar />
+        <div className="container">
+          <Nav />
+          {loading === true ? null : (
+            <div>
+              <Route exact path="/login" component={Login} />
+              <PrivateRoute exact path="/" component={HomeView} />
+            </div>
+          )}
+        </div>
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { user } = state.auth;
-  return { user };
+  const { user, loading } = state.auth;
+  return { user, loading };
 };
 
-export default connect(mapStateToProps)(App);
+// second field here is the mapDispatchToProps
+export default connect(
+  mapStateToProps,
+  {
+    actionInitialData: handleInitialData
+  }
+)(App);
 
 App.propTypes = propTypes;
 App.defaultProps = defaultProps;
