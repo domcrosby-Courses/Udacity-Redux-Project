@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import HomeView from '../views/HomeView';
 import Login from '../views/Login';
 import '../App.css';
+import PrivateRoute from './PrivateRoute';
 
 class App extends React.Component {
   componentDidMount() {
@@ -14,22 +15,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Route
-          exact
-          path="/login"
-          component={() => (
-            // Renders the login page
-            <Login />
-          )}
-        />
-        <Route
-          exact
-          path="/"
-          component={() => (
-            // Renders the login page
-            <HomeView />
-          )}
-        />
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute exact path="/" component={HomeView} />
       </div>
     );
   }

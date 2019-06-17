@@ -8,7 +8,7 @@ const SELECT_USER = 'select_user';
 
 // Set initial state
 // TODO: Find a better way of doing selectedUser as null in options
-const INITIAL_STATE = { user: null, selectedUser: 'unselected', users: {} };
+const INITIAL_STATE = { user: 'unselected', selectedUser: 'unselected', users: {} };
 
 // Action Creators
 export function logIn(user) {
