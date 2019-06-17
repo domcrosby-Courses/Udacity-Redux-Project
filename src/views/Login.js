@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { logIn, logOut, getUsers, selectUser } from '../ducks/auth';
+import { logIn, getUsers, selectUser } from '../ducks/auth';
+import { LogOutButton } from '../Components';
 // import BookShelf from '../components/BookShelf';
 
 const propTypes = {
   actionGetUsers: PropTypes.func.isRequired,
   actionSelectUser: PropTypes.func.isRequired,
   actionLogIn: PropTypes.func.isRequired,
-  actionLogOut: PropTypes.func.isRequired,
   selectedUser: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   users: PropTypes.objectOf(PropTypes.object).isRequired
@@ -31,7 +31,7 @@ class Login extends Component {
 
   // TODO: You should move some of these components into container components
   render() {
-    const { selectedUser, users, actionLogIn, actionLogOut, user } = this.props;
+    const { selectedUser, users, actionLogIn, user } = this.props;
     if (user !== 'unselected') {
       return <Redirect to="/" />;
     }
@@ -58,14 +58,7 @@ class Login extends Component {
         >
           Log in
         </button>
-        <button
-          type="submit"
-          onClick={() => {
-            actionLogOut();
-          }}
-        >
-          Log Out
-        </button>
+        <LogOutButton />
       </div>
     );
   }
@@ -81,7 +74,6 @@ export default connect(
   mapStateToProps,
   {
     actionLogIn: logIn,
-    actionLogOut: logOut,
     actionGetUsers: getUsers,
     actionSelectUser: selectUser
   }

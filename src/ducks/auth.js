@@ -45,7 +45,7 @@ export default function reducer(state = INITIAL_STATE, action) {
       // make new object - you can't keep the old
       return { ...state, user: action.payload };
     case LOGOUT_USER:
-      return { ...state, user: null, selectedUser: 'unselected' };
+      return { ...state, user: 'unselected', selectedUser: 'unselected' };
     case GET_USERS:
       return { ...state, users: action.payload };
     case SELECT_USER:
