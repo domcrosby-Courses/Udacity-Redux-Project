@@ -1,9 +1,7 @@
-import { _getUsers } from '../data/_DATA';
-
 // Enter actions here
 const LOGIN_USER = 'login_user';
 const LOGOUT_USER = 'logout_user';
-const GET_USERS = 'get_users';
+const RECIEVE_USERS = 'recieve_users';
 const SELECT_USER = 'select_user';
 
 // Set initial state
@@ -24,10 +22,10 @@ export function logOut() {
   };
 }
 
-// THUNKED as has timeout
-export function getUsers() {
-  return dispatch => {
-    _getUsers().then(users => dispatch({ type: GET_USERS, payload: users }));
+export function recieveUsers(users) {
+  return {
+    type: RECIEVE_USERS,
+    payload: users
   };
 }
 
@@ -46,7 +44,7 @@ export default function reducer(state = INITIAL_STATE, action) {
       return { ...state, user: action.payload };
     case LOGOUT_USER:
       return { ...state, user: 'unselected', selectedUser: 'unselected' };
-    case GET_USERS:
+    case RECIEVE_USERS:
       return { ...state, users: action.payload };
     case SELECT_USER:
       return { ...state, selectedUser: action.payload };

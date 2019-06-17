@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { logIn, logOut } from '../ducks/auth';
 // import BookShelf from '../components/BookShelf';
 
 const propTypes = {};
@@ -29,7 +28,7 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { logIn, logOut }
+  {}
 )(HomeView);
 
 HomeView.propTypes = propTypes;

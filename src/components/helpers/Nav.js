@@ -20,10 +20,7 @@ class Nav extends Component {
     const { user } = this.props;
     return (
       <div>
-        <div>
-          <h2>Would You Rather - React Application</h2>
-        </div>
-        <nav className="nav">
+        <nav>
           <ul>
             <li>
               <NavLink to="/" exact>
@@ -38,6 +35,7 @@ class Nav extends Component {
             </li>
             {user !== 'unselected' && (
               <li>
+                <p>Welcome {user}</p>
                 <LogOutButton />
               </li>
             )}

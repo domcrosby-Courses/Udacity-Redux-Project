@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { logIn, getUsers, selectUser } from '../ducks/auth';
+import { logIn, selectUser } from '../ducks/auth';
 import { LogOutButton } from '../Components';
 // import BookShelf from '../components/BookShelf';
 
 const propTypes = {
-  actionGetUsers: PropTypes.func.isRequired,
   actionSelectUser: PropTypes.func.isRequired,
   actionLogIn: PropTypes.func.isRequired,
   selectedUser: PropTypes.string.isRequired,
@@ -18,11 +17,6 @@ const propTypes = {
 const defaultProps = {};
 
 class Login extends Component {
-  componentDidMount() {
-    const { actionGetUsers } = this.props;
-    actionGetUsers();
-  }
-
   // This is the correct way of calling a helper function
   change = event => {
     const { actionSelectUser } = this.props;
@@ -74,7 +68,6 @@ export default connect(
   mapStateToProps,
   {
     actionLogIn: logIn,
-    actionGetUsers: getUsers,
     actionSelectUser: selectUser
   }
 )(Login);
