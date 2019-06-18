@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import BookShelf from '../components/BookShelf';
+import { QuestionList } from '../Components';
 
 const propTypes = {};
 
@@ -15,7 +15,7 @@ class HomeView extends Component {
   render() {
     return (
       <div>
-        <p>Home</p>
+        <QuestionList answered />
       </div>
     );
   }

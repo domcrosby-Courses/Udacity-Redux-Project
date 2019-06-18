@@ -3,6 +3,7 @@ import getInitialData from '../data/api';
 import { recieveUsers, loadedUsers } from './auth';
 import { recieveQuestions } from './questions';
 
+// This works because you have Thunk as middleware
 export default function handleInitialData() {
   return dispatch => {
     dispatch(showLoading());
