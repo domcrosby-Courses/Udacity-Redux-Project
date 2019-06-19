@@ -28,8 +28,8 @@ class App extends Component {
     return (
       <Fragment>
         <LoadingBar />
+        <Nav />
         <div className="container">
-          <Nav />
           {loading === true ? null : (
             <div>
               <Route exact path="/login" component={Login} />

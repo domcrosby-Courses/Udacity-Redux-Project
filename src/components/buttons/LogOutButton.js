@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logOut } from '../../ducks/auth';
@@ -15,14 +16,13 @@ class LogOutButton extends Component {
   render() {
     const { actionLogOut } = this.props;
     return (
-      <button
-        type="submit"
+      <NavLink
         onClick={() => {
           actionLogOut();
         }}
       >
         Log Out
-      </button>
+      </NavLink>
     );
   }
 }

@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import LogOutButton from '../buttons/LogOutButton';
 
 const propTypes = {
-  username: PropTypes.string.isRequired
+  username: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired
 };
 
 const defaultProps = {};
@@ -17,32 +18,35 @@ class Nav extends Component {
   }
 
   render() {
-    const { username } = this.props;
+    const { username, avatar } = this.props;
     return (
       <div>
         <nav>
-          <ul>
-            <li>
-              <NavLink to="/" exact>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/new">New Question</NavLink>
-            </li>
-            <li>
-              <NavLink to="/leader">LeaderBoard</NavLink>
-            </li>
-            {username !== 'unselected' && (
+          <div className="navHolder">
+            <ul>
               <li>
-                <p>
+                <NavLink to="/" exact>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/new">New Question</NavLink>
+              </li>
+              <li>
+                <NavLink to="/leader">Leader Board</NavLink>
+              </li>
+            </ul>
+            {username !== 'unselected' && (
+              <ul className="login">
+                <li>
                   Hello,
                   {username}
-                </p>
+                </li>
+                <img src={avatar} alt={`Avatar of ${username}`} className="avatar" />
                 <LogOutButton />
-              </li>
+              </ul>
             )}
-          </ul>
+          </div>
         </nav>
       </div>
     );
@@ -50,9 +54,11 @@ class Nav extends Component {
 }
 
 const mapStateToProps = state => {
-  const { username } = state.auth;
+  const { username, avatar } = state.auth;
+  console.log(avatar);
   return {
-    username
+    username,
+    avatar
   };
 };
 

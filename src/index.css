@@ -11,15 +11,53 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-nav ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  text-decoration: none;
+nav {
   border-bottom: solid 3px #3dcea5;
+  margin-top: 30px;
 }
 
-nav li a.active {
+.navHolder {
+  width: 800px;
+  margin: 10px auto;
+}
+
+nav ul {
+  display: inline-block;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav a {
+  padding: 10px 10px;
+  margin: 0px 10px;
+  text-decoration: none;
+  color: black;
+}
+
+nav li a.active,
+nav a:hover {
   background-color: #3dcea5;
   color: white;
+}
+
+.login {
+  float: right;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.avatar {
+  height: 30px;
+  width: 30px;
+  border-radius: 25px;
+  margin: -10px 0px;
+  margin-left: 20px;
+  background: gray;
 }

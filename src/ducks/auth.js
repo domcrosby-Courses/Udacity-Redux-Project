@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   user: 'unselected',
   selectedUser: 'unselected',
   username: 'unselected',
+  avatar: 'unselected',
   users: {},
   loading: true
 };
@@ -54,9 +55,20 @@ export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case LOGIN_USER:
       // make new object - you can't keep the old
-      return { ...state, user: action.payload, username: state.users[action.payload].name };
+      return {
+        ...state,
+        user: action.payload,
+        username: state.users[action.payload].name,
+        avatar: state.users[action.payload].avatarURL
+      };
     case LOGOUT_USER:
-      return { ...state, user: 'unselected', selectedUser: 'unselected', username: 'unselected' };
+      return {
+        ...state,
+        user: 'unselected',
+        selectedUser: 'unselected',
+        username: 'unselected',
+        avatar: 'unselected'
+      };
     case RECIEVE_USERS:
       return { ...state, users: action.payload };
     case SELECT_USER:
