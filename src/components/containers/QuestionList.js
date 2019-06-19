@@ -1,43 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Question from './Question';
 
 const propTypes = {
-  questions: PropTypes.objectOf(PropTypes.object).isRequired,
-  answered: PropTypes.bool.isRequired
+  questions: PropTypes.objectOf(PropTypes.object).isRequired
 };
 
 const defaultProps = {};
 
 class QuestionList extends Component {
+  componentDidMount() {}
+
   render() {
-    const { questions, answered } = this.props;
+    const { questions } = this.props;
     return (
       <ul className="dashboard-list">
-        {questions
-          .filter(question => {
-            return question.answered === answered;
-          })
-          .map(question => (
-            <li key={question.id}>
-              <p id={question.id} />
-            </li>
-          ))}
+        {questions.map(question => (
+          <li key={question.id}>
+            <Question id={question.id} />
+          </li>
+        ))}
       </ul>
     );
   }
 }
 
 // TODO: add in method to sort
-function mapStateToProps(state) {
+// Notes: you could use object.keys here to get just ID's but sorting would be harder
+function mapStateToProps(state, { answered }) {
   const { user } = state.auth;
   const { questions } = state.questions;
   return {
     user,
-    questions: Object.values(questions).map(aQuestion => {
-      const answered =
-        aQuestion.optionOne.votes.includes(user) || aQuestion.optionTwo.votes.includes(user);
-      return { ...aQuestion, answered };
+    questions: Object.values(questions).filter(aQuestion => {
+      return (
+        (aQuestion.optionOne.votes.includes(user) || aQuestion.optionTwo.votes.includes(user)) ===
+        answered
+      );
     })
   };
 }

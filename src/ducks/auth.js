@@ -7,7 +7,13 @@ const LOADED_USERS = 'loaded_users';
 
 // Set initial state
 // TODO: Find a better way of doing selectedUser as null in options
-const INITIAL_STATE = { user: 'unselected', selectedUser: 'unselected', users: {}, loading: true };
+const INITIAL_STATE = {
+  user: 'unselected',
+  selectedUser: 'unselected',
+  username: 'unselected',
+  users: {},
+  loading: true
+};
 
 // Action Creators
 export function logIn(user) {
@@ -48,9 +54,9 @@ export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case LOGIN_USER:
       // make new object - you can't keep the old
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, username: state.users[action.payload].name };
     case LOGOUT_USER:
-      return { ...state, user: 'unselected', selectedUser: 'unselected' };
+      return { ...state, user: 'unselected', selectedUser: 'unselected', username: 'unselected' };
     case RECIEVE_USERS:
       return { ...state, users: action.payload };
     case SELECT_USER:

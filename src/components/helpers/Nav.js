@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../buttons/LogOutButton';
 
 const propTypes = {
-  user: PropTypes.string.isRequired
+  username: PropTypes.string.isRequired
 };
 
 const defaultProps = {};
@@ -17,7 +17,7 @@ class Nav extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { username } = this.props;
     return (
       <div>
         <nav>
@@ -33,9 +33,12 @@ class Nav extends Component {
             <li>
               <NavLink to="/leader">LeaderBoard</NavLink>
             </li>
-            {user !== 'unselected' && (
+            {username !== 'unselected' && (
               <li>
-                <p>Welcome {user}</p>
+                <p>
+                  Hello,
+                  {username}
+                </p>
                 <LogOutButton />
               </li>
             )}
@@ -47,8 +50,10 @@ class Nav extends Component {
 }
 
 const mapStateToProps = state => {
-  const { user } = state.auth;
-  return { user };
+  const { username } = state.auth;
+  return {
+    username
+  };
 };
 
 export default connect(mapStateToProps)(Nav);

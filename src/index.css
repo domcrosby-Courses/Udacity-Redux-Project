@@ -16,10 +16,10 @@ nav ul {
   flex-direction: row;
   justify-content: space-around;
   text-decoration: none;
-  border-bottom: solid 3px #00ffff;
+  border-bottom: solid 3px #3dcea5;
 }
 
 nav li a.active {
-  background-color: #00ffff;
+  background-color: #3dcea5;
   color: white;
 }
