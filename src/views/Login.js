@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { logIn, selectUser } from '../ducks/auth';
-import { LogOutButton } from '../Components';
 // import BookShelf from '../components/BookShelf';
 
 const propTypes = {
@@ -52,7 +51,6 @@ class Login extends Component {
         >
           Log in
         </button>
-        <LogOutButton />
       </div>
     );
   }

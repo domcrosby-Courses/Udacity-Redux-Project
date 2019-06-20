@@ -9,7 +9,7 @@ const propTypes = {};
 
 const defaultProps = {};
 
-class HomeView extends Component {
+class LeaderView extends Component {
   componentDidMount() {
     // TODO: add something in here
   }
@@ -41,7 +41,7 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {}
-)(HomeView);
+)(LeaderView);
 
-HomeView.propTypes = propTypes;
-HomeView.defaultProps = defaultProps;
+LeaderView.propTypes = propTypes;
+LeaderView.defaultProps = defaultProps;

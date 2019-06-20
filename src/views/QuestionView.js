@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { QuestionList } from '../Components';
+import { Question } from '../Components';
 
-const propTypes = {};
+const propTypes = {
+  id: PropTypes.string.isRequired
+};
 
 const defaultProps = {};
 
@@ -13,17 +15,18 @@ class HomeView extends Component {
   }
 
   render() {
+    const { id } = this.props;
     return (
       <div>
-        <QuestionList answered />
+        <Question key={id} id={id} poll />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  const { user } = state.auth;
-  return { user };
+function mapStateToProps(state, props) {
+  const { id } = props.match.params;
+  return { id };
 }
 
 export default connect(

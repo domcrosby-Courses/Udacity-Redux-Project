@@ -5,6 +5,9 @@ import { Route } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading';
 import handleInitialData from '../ducks/initialData';
 import HomeView from '../views/HomeView';
+import NewView from '../views/NewView';
+import LeaderView from '../views/LeaderView';
+import QuestionView from '../views/QuestionView';
 import Login from '../views/Login';
 import '../App.css';
 import { PrivateRoute, Nav } from '../Components';
@@ -34,6 +37,9 @@ class App extends Component {
             <div>
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/" component={HomeView} />
+              <PrivateRoute exact path="/new" component={NewView} />
+              <PrivateRoute exact path="/leader" component={LeaderView} />
+              <PrivateRoute exact path="/question/:id" component={QuestionView} />
             </div>
           )}
         </div>

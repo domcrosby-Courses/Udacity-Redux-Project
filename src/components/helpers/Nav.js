@@ -42,7 +42,7 @@ class Nav extends Component {
                   Hello,
                   {username}
                 </li>
-                <img src={avatar} alt={`Avatar of ${username}`} className="avatar" />
+                <img src={avatar} alt="Avatar" className="avatar" />
                 <LogOutButton />
               </ul>
             )}
@@ -55,7 +55,6 @@ class Nav extends Component {
 
 const mapStateToProps = state => {
   const { username, avatar } = state.auth;
-  console.log(avatar);
   return {
     username,
     avatar

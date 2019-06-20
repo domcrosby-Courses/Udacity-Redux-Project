@@ -13,10 +13,12 @@ const defaultProps = {};
 class LogOutButton extends Component {
   componentDidMount() {}
 
+  // TODO: Should replace navlink with a button
   render() {
     const { actionLogOut } = this.props;
     return (
       <NavLink
+        to="/login"
         onClick={() => {
           actionLogOut();
         }}

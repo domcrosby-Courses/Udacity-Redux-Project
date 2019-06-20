@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Question from './Question';
 
 const propTypes = {
-  questions: PropTypes.objectOf(PropTypes.object).isRequired
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 const defaultProps = {};
@@ -15,30 +15,29 @@ class QuestionList extends Component {
   render() {
     const { questions } = this.props;
     return (
-      <ul className="dashboard-list">
+      <div className="dashboard-list">
         {questions.map(question => (
-          <li key={question.id}>
-            <Question id={question.id} />
-          </li>
+          <Question key={question.id} id={question.id} />
         ))}
-      </ul>
+      </div>
     );
   }
 }
 
-// TODO: add in method to sort
 // Notes: you could use object.keys here to get just ID's but sorting would be harder
 function mapStateToProps(state, { answered }) {
   const { user } = state.auth;
   const { questions } = state.questions;
   return {
     user,
-    questions: Object.values(questions).filter(aQuestion => {
-      return (
-        (aQuestion.optionOne.votes.includes(user) || aQuestion.optionTwo.votes.includes(user)) ===
-        answered
-      );
-    })
+    questions: Object.values(questions)
+      .filter(aQuestion => {
+        return (
+          (aQuestion.optionOne.votes.includes(user) || aQuestion.optionTwo.votes.includes(user)) ===
+          answered
+        );
+      })
+      .sort((a, b) => b.timestamp - a.timestamp)
   };
 }
 
