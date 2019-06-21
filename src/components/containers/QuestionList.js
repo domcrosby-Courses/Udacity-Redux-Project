@@ -27,7 +27,7 @@ class QuestionList extends Component {
 // Notes: you could use object.keys here to get just ID's but sorting would be harder
 function mapStateToProps(state, { answered }) {
   const { user } = state.auth;
-  const { questions } = state.questions;
+  const { questions } = state;
   return {
     user,
     questions: Object.values(questions)
