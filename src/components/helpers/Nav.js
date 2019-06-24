@@ -30,10 +30,10 @@ class Nav extends Component {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/new">New Question</NavLink>
+                <NavLink to="/add">New Question</NavLink>
               </li>
               <li>
-                <NavLink to="/leader">Leader Board</NavLink>
+                <NavLink to="/leaderboard">Leader Board</NavLink>
               </li>
             </ul>
             {username !== 'unselected' && (

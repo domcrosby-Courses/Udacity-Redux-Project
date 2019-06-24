@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { QuestionList } from '../Components';
+import { User } from '../Components';
 import 'react-tabs/style/react-tabs.css';
 
 const propTypes = {};
@@ -15,27 +14,29 @@ class LeaderView extends Component {
   }
 
   render() {
+    // eslint-disable-next-line react/prop-types
+    const { users } = this.props;
     return (
-      <Tabs>
-        <TabList>
-          <Tab>Unanswered Questions</Tab>
-          <Tab>Answered Questions</Tab>
-        </TabList>
-
-        <TabPanel>
-          <QuestionList answered={false} />
-        </TabPanel>
-        <TabPanel>
-          <QuestionList answered />
-        </TabPanel>
-      </Tabs>
+      <div className="dashboard-list">
+        {users.map(user => (
+          <User key={user.id} id={user.id} />
+        ))}
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { user } = state.auth;
-  return { user };
+  const { users } = state.auth;
+  return {
+    users: Object.values(users).sort(
+      (a, b) =>
+        b.questions.length +
+        Object.keys(b.answers).length -
+        a.questions.length -
+        Object.keys(a.answers).length
+    )
+  };
 }
 
 export default connect(

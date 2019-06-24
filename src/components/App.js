@@ -38,8 +38,8 @@ class App extends Component {
             <div>
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/" component={HomeView} />
-              <PrivateRoute exact path="/new" component={NewView} />
-              <PrivateRoute exact path="/leader" component={LeaderView} />
+              <PrivateRoute exact path="/add" component={NewView} />
+              <PrivateRoute exact path="/leaderboard" component={LeaderView} />
               <PrivateRoute exact path="/question/:id" component={QuestionView} redirecta />
               <PrivateRoute exact path="/404" component={four04} />
             </div>
