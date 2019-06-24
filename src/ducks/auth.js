@@ -1,7 +1,7 @@
 // Enter actions here
 const LOGIN_USER = 'login_user';
 const LOGOUT_USER = 'logout_user';
-const RECIEVE_USERS = 'recieve_users';
+const RECEIVE_USERS = 'receive_users';
 const SELECT_USER = 'select_user';
 const LOADED_USERS = 'loaded_users';
 
@@ -30,9 +30,9 @@ export function logOut() {
   };
 }
 
-export function recieveUsers(users) {
+export function receiveUsers(users) {
   return {
-    type: RECIEVE_USERS,
+    type: RECEIVE_USERS,
     payload: users
   };
 }
@@ -69,7 +69,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         username: 'unselected',
         avatar: 'unselected'
       };
-    case RECIEVE_USERS:
+    case RECEIVE_USERS:
       return { ...state, users: action.payload };
     case SELECT_USER:
       return { ...state, selectedUser: action.payload };

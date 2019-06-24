@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { vote } from '../../ducks/questions';
+import { handleVote } from '../../ducks/questions';
 
 // TODO: should expand proptype to cover contents
 const propTypes = {
@@ -107,7 +107,7 @@ function mapStateToProps(state, { id, poll }) {
 export default connect(
   mapStateToProps,
   {
-    actionVote: vote
+    actionVote: handleVote
   }
 )(Question);
 

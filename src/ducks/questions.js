@@ -1,10 +1,10 @@
 import { showLoading, hideLoading } from 'react-redux-loading';
 import { saveQuestion, saveQuestionAnswer } from '../data/api';
 
-import { recieveUsers } from './auth';
+import { receiveUsers } from './auth';
 
 // Enter actions here
-const RECIEVE_QUESTIONS = 'get_questions';
+const RECEIVE_QUESTIONS = 'get_questions';
 const VOTE = 'vote';
 const ADD_QUESTION = 'ADD_QUESTION';
 
@@ -32,17 +32,16 @@ export function handleAddQuestion(t1, t2) {
       optionTwoText: t2,
       author: user
     }).then(res => {
-      console.log(res);
       dispatch(addQuestion(res.question));
-      dispatch(recieveUsers(res.users));
+      dispatch(receiveUsers(res.users));
       dispatch(hideLoading());
     });
   };
 }
 
-export function recieveQuestions(questions) {
+export function receiveQuestions(questions) {
   return {
-    type: RECIEVE_QUESTIONS,
+    type: RECEIVE_QUESTIONS,
     payload: questions
   };
 }
@@ -56,11 +55,24 @@ export function vote(user, questionID, voteID) {
   };
 }
 
+export function handleVote(authedUser, qid, answer) {
+  return dispatch => {
+    const answerInfo = { authedUser, qid, answer };
+
+    return saveQuestionAnswer(answerInfo).then(res => {
+      // dispatch(vote(authedUser, qid, answer));
+      dispatch(receiveUsers(res.users));
+      dispatch(receiveQuestions(res.questions));
+    });
+  };
+}
+
 // TODO: should theoretically do an optimistic load
+// You could either call receiveQuestions or put state in twice
 // Reducer - must be export default function reducer
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case RECIEVE_QUESTIONS:
+    case RECEIVE_QUESTIONS:
       return { ...state, ...action.payload };
     case ADD_QUESTION:
       return {
@@ -82,3 +94,17 @@ export default function reducer(state = INITIAL_STATE, action) {
       return state;
   }
 }
+
+// If you wanted to do optimistic updates you coulddo something like this
+// export function handleToggleTweet (info) {
+//   return (dispatch) => {
+//     dispatch(toggleTweet(info))
+
+//     return saveLikeToggle(info)
+//       .catch((e) => {
+//         console.warn('Error in handleToggleTweet: ', e)
+//         dispatch(toggleTweet(info))
+//         alert('The was an error liking the tweet. Try again.')
+//       })
+//   }
+// }

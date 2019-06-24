@@ -203,7 +203,10 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
         }
       };
 
-      res();
+      res({
+        questions,
+        users
+      });
     }, 500);
   });
 }
