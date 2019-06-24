@@ -8,6 +8,7 @@ import HomeView from '../views/HomeView';
 import NewView from '../views/NewView';
 import LeaderView from '../views/LeaderView';
 import QuestionView from '../views/QuestionView';
+import four04 from '../views/four04';
 import Login from '../views/Login';
 import '../App.css';
 import { PrivateRoute, Nav } from '../Components';
@@ -40,6 +41,7 @@ class App extends Component {
               <PrivateRoute exact path="/new" component={NewView} />
               <PrivateRoute exact path="/leader" component={LeaderView} />
               <PrivateRoute exact path="/question/:id" component={QuestionView} />
+              {/* <Route component={four04} /> */}
             </div>
           )}
         </div>

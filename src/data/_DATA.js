@@ -173,7 +173,7 @@ export function _saveQuestion(question) {
         }
       };
 
-      res(formattedQuestion);
+      res({ question: formattedQuestion, users });
     }, 1000);
   });
 }
