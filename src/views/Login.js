@@ -24,9 +24,15 @@ class Login extends Component {
 
   // TODO: You should move some of these components into container components
   render() {
-    const { selectedUser, users, actionLogIn, user } = this.props;
+    // eslint-disable-next-line react/prop-types
+    const { selectedUser, users, actionLogIn, user, location } = this.props;
+    const { state } = location;
+    let redirectURL = '/';
+    if (state !== undefined) {
+      redirectURL = state.redirectUrl;
+    }
     if (user !== 'unselected') {
-      return <Redirect to="/" />;
+      return <Redirect to={redirectURL} />;
     }
     return (
       <div>

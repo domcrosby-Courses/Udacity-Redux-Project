@@ -10,10 +10,22 @@ const propTypes = {
 const defaultProps = {};
 
 // eslint-disable-next-line react/prop-types
-const PrivateRoute = ({ component: Component, user, ...rest }) => (
+const PrivateRoute = ({ component: Component, user, redirecta, ...rest }) => (
   <Route
     {...rest}
-    render={props => (user === 'unselected' ? <Redirect to="/login" /> : <Component {...props} />)}
+    render={props =>
+      user === 'unselected' ? (
+        <Redirect
+          to={{
+            pathname: '/login',
+            // eslint-disable-next-line react/prop-types
+            state: { redirectUrl: redirecta ? props.location.pathname : '/' }
+          }}
+        />
+      ) : (
+        <Component {...props} />
+      )
+    }
   />
 );
 

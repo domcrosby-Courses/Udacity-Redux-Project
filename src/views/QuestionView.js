@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Question } from '../Components';
@@ -15,7 +16,11 @@ class HomeView extends Component {
   }
 
   render() {
-    const { id } = this.props;
+    // eslint-disable-next-line react/prop-types
+    const { id, questions } = this.props;
+    if (questions[id] === undefined) {
+      return <Redirect to="/404" />;
+    }
     return (
       <div>
         <Question key={id} id={id} poll />
@@ -26,7 +31,8 @@ class HomeView extends Component {
 
 function mapStateToProps(state, props) {
   const { id } = props.match.params;
-  return { id };
+  const { questions } = state;
+  return { id, questions };
 }
 
 export default connect(

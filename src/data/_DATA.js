@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 let users = {
   sarahedo: {
     id: 'sarahedo',
@@ -178,6 +179,7 @@ export function _saveQuestion(question) {
   });
 }
 
+// eslint-disable-next-line no-underscore-dangle
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
   return new Promise((res, rej) => {
     setTimeout(() => {

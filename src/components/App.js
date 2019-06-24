@@ -40,8 +40,8 @@ class App extends Component {
               <PrivateRoute exact path="/" component={HomeView} />
               <PrivateRoute exact path="/new" component={NewView} />
               <PrivateRoute exact path="/leader" component={LeaderView} />
-              <PrivateRoute exact path="/question/:id" component={QuestionView} />
-              {/* <Route component={four04} /> */}
+              <PrivateRoute exact path="/question/:id" component={QuestionView} redirecta />
+              <PrivateRoute exact path="/404" component={four04} />
             </div>
           )}
         </div>
